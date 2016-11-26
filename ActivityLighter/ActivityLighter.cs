@@ -148,11 +148,6 @@ namespace ActivityLighter
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
-            ToggleAutomatic();
-        }
-
-        private void loginButton_Click(object sender, EventArgs e)
-        {
             UserLogin testDialog = new UserLogin();
             testDialog.ShowDialog();
             //// Show testDialog as a modal dialog and determine if DialogResult = OK.
@@ -166,6 +161,8 @@ namespace ActivityLighter
             //}
             testDialog.Dispose();
         }
+
+
 
 
         //private void ImportStatusForm_Resize(object sender, EventArgs e)

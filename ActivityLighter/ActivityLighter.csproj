@@ -109,9 +109,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\trafficLights.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="data\traffic-light-hi.png" />
   </ItemGroup>
   <ItemGroup>
