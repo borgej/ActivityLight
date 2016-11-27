@@ -9,3 +9,13 @@ Updates
 Initial program commit
 -Missing lync interaction
 -Exchange server communication is set up, missing excelHost key in app.config
+
+27.11.2016
+
+v. 0.9
+-Added more statusBar errors
+-Exit to tray
+-Minimize to tray
+-Context menu action on tray mirrors application
+-Option to mirrorToLync
+-Changed app.config file
