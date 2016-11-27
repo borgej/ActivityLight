@@ -20,6 +20,16 @@ namespace ActivityLighter
             this.username.Text = ReadSetting("username");
             this.password.Text = ReadSetting("epost");
             this.password.Text = ReadSetting("password");
+            this.exchangeHost.Text = ReadSetting("exchangeHost");
+
+            if (Convert.ToBoolean(ReadSetting("mirrorToLync")))
+            {
+                this.mirrorToLync.Checked = true;
+            }
+            else
+            {
+                this.mirrorToLync.Checked = false;
+            }
         }
 
         static string ReadSetting(string key)
@@ -72,6 +82,16 @@ namespace ActivityLighter
                 AddUpdateAppSettings("username", this.username.Text);
                 AddUpdateAppSettings("epost", this.epost.Text);
                 AddUpdateAppSettings("password", this.password.Text);
+                AddUpdateAppSettings("exchangeHost", this.exchangeHost.Text);
+
+                if (this.mirrorToLync.Checked)
+                {
+                    AddUpdateAppSettings("mirrorToLync", "true");
+                }
+                else
+                {
+                    AddUpdateAppSettings("mirrorToLync", "false");
+                }
 
             }
             catch (Exception d)
@@ -87,12 +107,14 @@ namespace ActivityLighter
             this.password.SelectAll();
         }
 
-        private void password_KeyDown(object sender, KeyEventArgs e)
+        private void input_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Return)
             {
                 lagreBtn_Click(null, null);
             }
         }
+
+
     }
 }
