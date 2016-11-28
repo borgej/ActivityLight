@@ -18,8 +18,12 @@ namespace ActivityLighter
             InitializeComponent();
             
             this.username.Text = ReadSetting("username");
-            this.password.Text = ReadSetting("epost");
-            this.password.Text = ReadSetting("password");
+            this.epost.Text = ReadSetting("epost");
+            if (!string.IsNullOrWhiteSpace(ReadSetting("password")))
+            {
+                this.password.Text = StringCipher.Decrypt(ReadSetting("password"));
+            }
+            
             this.exchangeHost.Text = ReadSetting("exchangeHost");
 
             if (Convert.ToBoolean(ReadSetting("mirrorToLync")))
@@ -81,7 +85,11 @@ namespace ActivityLighter
             {
                 AddUpdateAppSettings("username", this.username.Text);
                 AddUpdateAppSettings("epost", this.epost.Text);
-                AddUpdateAppSettings("password", this.password.Text);
+
+                // cipher password
+                var encryptedPass = StringCipher.Encrypt(this.password.Text);
+                AddUpdateAppSettings("password", encryptedPass);
+
                 AddUpdateAppSettings("exchangeHost", this.exchangeHost.Text);
 
                 if (this.mirrorToLync.Checked)
@@ -115,6 +123,9 @@ namespace ActivityLighter
             }
         }
 
+        private void UserLogin_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }

@@ -317,7 +317,7 @@ namespace ActivityLighter
 
                     // TODO: get url for webservice
                     exchangeService.Url = new Uri(ReadSetting("exchangeHost"));
-                    exchangeService.Credentials = new WebCredentials(ReadSetting("username"), ReadSetting("password"));
+                    exchangeService.Credentials = new WebCredentials(ReadSetting("username"), StringCipher.Decrypt(ReadSetting("password")));
                     var userStatus = exchangeService.GetUserAvailability(attendees, new TimeWindow(DateTime.Now, DateTime.Now.AddDays(1)),
                                                                              AvailabilityData.FreeBusy,
                                                                              myOptions);
@@ -562,8 +562,18 @@ namespace ActivityLighter
             this.Activate();
         }
 
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
 
+        private void aboutButton_Click(object sender, EventArgs e)
+        {
+            AboutBox1 aboutDialog = new AboutBox1();
+            aboutDialog.ShowDialog();
 
+            aboutDialog.Dispose();
+        }
     }
 
 

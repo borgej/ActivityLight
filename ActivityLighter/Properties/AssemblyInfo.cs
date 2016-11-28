@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ActivityLighter")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("ActivityLight is a Luxafor status program that reads your availability from your Lync client or Exchange account and sets the color of the Luxafor light thereby. You can also choose your own availability and ActivityLighter will update your Lync status.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("BJSolutions")]
 [assembly: AssemblyProduct("ActivityLighter")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("GNU GENERAL PUBLIC LICENSE")]
+[assembly: AssemblyTrademark("GNU GENERAL PUBLIC LICENSE")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.9.0.0")]
+[assembly: AssemblyFileVersion("0.9.0.0")]
