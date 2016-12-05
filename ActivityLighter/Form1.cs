@@ -597,7 +597,6 @@ namespace ActivityLighter
 
         private void exitButton_Click(object sender, EventArgs e)
         {
-            _device.Dispose();
             Application.Exit();
         }
 
