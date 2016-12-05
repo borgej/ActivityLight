@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using LuxaforSharp;
 using Microsoft.Lync.Model;
 using Microsoft.Exchange.WebServices.Data;
+using Microsoft.Lync.Model.Extensibility;
 using Color = System.Drawing.Color;
 using Contact = Microsoft.Lync.Model.Contact;
 
@@ -29,6 +30,10 @@ namespace ActivityLighter
         private bool _isYellow = false;
         private bool _isRed = false;
 
+        private const byte BLINKSPEED = 15;
+        private const byte TIMEOUT = 0;
+        private const byte REPEAT = Byte.MaxValue;
+
         // luxafor device
         private IDevice _device;
 
@@ -45,8 +50,7 @@ namespace ActivityLighter
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
-            //button_automatic_Click(null, null);
+            button_automatic_Click(null, null);
         }
 
         public bool isAutomatic()
@@ -63,14 +67,11 @@ namespace ActivityLighter
             if (this.WindowState == FormWindowState.Minimized && cursorNotInTaskbar)
             {
 
-                this.WindowState = FormWindowState.Minimized;
-                this.ShowInTaskbar = false;
                 notifyIcon1.Visible = true;
-                notifyIcon1.BalloonTipTitle = "Activitylight";
-                notifyIcon1.BalloonTipText = "Activitylight is running in system tray";
-                notifyIcon1.ShowBalloonTip(4000);
+
                 this.Hide();
             }
+
                 
         }
 
@@ -85,7 +86,7 @@ namespace ActivityLighter
                 notifyIcon1.Visible = true;
                 notifyIcon1.BalloonTipTitle = "Activitylight";
                 notifyIcon1.BalloonTipText = "Activitylight is running in system tray";
-                notifyIcon1.ShowBalloonTip(4000);
+                notifyIcon1.ShowBalloonTip(2000);
                 this.Hide();
             }
         }
@@ -96,7 +97,7 @@ namespace ActivityLighter
             {
                 if (isAutomatic())
                 {
-                    Console.WriteLine("Info: Refreshing status from Lync/Exchange");
+                    Console.WriteLine("Info: Refreshing status from Skype/Exchange");
                     //GetExchangeStatus();
                     GetLyncStatus();
                 }
@@ -162,24 +163,48 @@ namespace ActivityLighter
             return _isGreen;
         }
 
-        private void setColor(string color)
+        private void setColor(string color, bool blink = false)
         {
 
             try
             {
+                bool set = false;
                 switch (color)
                 {
-                    case "green":
-                        _device.SetColor(LedTarget.All, new LuxaforSharp.Color(0, 0, 255));
-                        break;
-                    case "yellow":
-                        _device.SetColor(LedTarget.All, new LuxaforSharp.Color(255, 255, 0));
-                        break;
                     case "red":
+                        if (blink)
+                        {
+                            _device.Blink(LedTarget.All, new LuxaforSharp.Color(255, 0, 0), BLINKSPEED, REPEAT,
+                                TIMEOUT);
+                            
+                            break;
+
+                        }
                         _device.SetColor(LedTarget.All, new LuxaforSharp.Color(255, 0, 0));
                         break;
+                    case "green":
+                        if (blink)
+                        {
+                            _device.Blink(LedTarget.All, new LuxaforSharp.Color(0, 255, 0), BLINKSPEED, REPEAT,
+                                TIMEOUT);
+                            break;
+
+                        }
+                        _device.SetColor(LedTarget.All, new LuxaforSharp.Color(0, 255, 0));
+                        break;
+                    case "yellow":
+                        if (blink)
+                        {
+                            _device.Blink(LedTarget.All, new LuxaforSharp.Color(255, 215, 0), BLINKSPEED, REPEAT,
+                                TIMEOUT);
+                            break;
+
+                        }
+                        _device.SetColor(LedTarget.All, new LuxaforSharp.Color(255, 215, 0));
+                        break;
+                    
                 }
-                _device.SetColor(LedTarget.All, new LuxaforSharp.Color(0, 0, 255));
+                
             }
             catch (Exception e)
             {
@@ -373,47 +398,56 @@ namespace ActivityLighter
                 
 
                 var selfStatus = lyncClient.Self.Contact.GetContactInformation(ContactInformationType.Availability);
+                var selfStatusId = lyncClient.Self.Contact.GetContactInformation(ContactInformationType.ActivityId);
 
-                switch (selfStatus.ToString())
+                if (selfStatusId.ToString() == "in-a-call")
                 {
-                    // red, bizzi bee
-                    case "6500":
-                        setColor("red");
-                        //statusbar.Text = "Lync viser opptatt, endret til RØD";
-                        setStatusText("Lync shows buzy, RED chosen");
-                        break;
-                    // red, do not disturb
-                    case "9500":
-                        setColor("red");
-                        //statusbar.Text = "Lync viser opptatt, endret til RØD";
-
-                        setStatusText("Lync shows don't disturb, RED chosen");
-                        break;
-                    // available
-                    case "3500":
-                        setColor("green");
-                        //statusbar.Text = "Lync viser opptatt, endret til GRØNN";
-                        setStatusText("Lync shows available, GREEN chosen");
-                        break;
-                    // yellow, "away"
-                    case "12500":
-                        setColor("yellow");
-                        //statusbar.Text = "Lync viser borte, endret til GUL";
-                        setStatusText("Lync shows away, YELLOW chosen");
-                        break;
-                    case "15500":
-                        setColor("yellow");
-                        //statusbar.Text = "Lync viser borte, endret til GUL";
-
-                        setStatusText("Lync shows away, YELLOW chosen");
-                        break;
+                    setColor("red", true);
                 }
+                else
+                {
+                    switch (selfStatus.ToString())
+                    {
+                        // red, bizzi bee
+                        case "6500":
+                            setColor("red");
+                            //statusbar.Text = "Lync viser opptatt, endret til RØD";
+                            setStatusText("Skype shows buzy, RED chosen");
+                            break;
+                        // red, do not disturb
+                        case "9500":
+                            setColor("red");
+                            //statusbar.Text = "Lync viser opptatt, endret til RØD";
+
+                            setStatusText("Skype shows don't disturb, RED chosen");
+                            break;
+                        // available
+                        case "3500":
+                            setColor("green");
+                            //statusbar.Text = "Lync viser opptatt, endret til GRØNN";
+                            setStatusText("Skype shows available, GREEN chosen");
+                            break;
+                        // yellow, "away"
+                        case "12500":
+                            setColor("yellow");
+                            //statusbar.Text = "Lync viser borte, endret til GUL";
+                            setStatusText("Skype shows away, YELLOW chosen");
+                            break;
+                        case "15500":
+                            setColor("yellow");
+                            //statusbar.Text = "Lync viser borte, endret til GUL";
+
+                            setStatusText("Skype shows away, YELLOW chosen");
+                            break;
+                    }
+                }
+                
 
 
             }
             catch (Exception ex)
             {
-                setStatusText("Error: Can't find Lync client...");
+                setStatusText("Error: Can't find Skype client...");
             }
 
         }
@@ -430,6 +464,7 @@ namespace ActivityLighter
 
                 lyncClient = LyncClient.GetClient();
                 var availability = new ContactAvailability();
+
                 switch (status)
                 {
                     case "green":
@@ -454,7 +489,7 @@ namespace ActivityLighter
             }
             catch (Exception exception)
             {
-                setStatusText("Error: " + "Can't set Lync status, client not found...");
+                setStatusText("Error: " + "Can't set Skype status, client not found...");
 
             }
         }
@@ -556,14 +591,13 @@ namespace ActivityLighter
 
         private void notifyIcon1_DoubleClick(object sender, EventArgs e)
         {
-            this.ShowInTaskbar = true;
-            notifyIcon1.Visible = false;
-
-            this.Activate();
+            this.notifyIconMenu.Close();
+            showAppMenuItem_Click(sender, e);
         }
 
         private void exitButton_Click(object sender, EventArgs e)
         {
+            _device.Dispose();
             Application.Exit();
         }
 
@@ -573,6 +607,22 @@ namespace ActivityLighter
             aboutDialog.ShowDialog();
 
             aboutDialog.Dispose();
+        }
+
+        private void notifyIcon1_Click(object sender, EventArgs e)
+        {
+            notifyIconMenu.Show(Cursor.Position);
+        }
+
+        private void showAppMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            this.ShowInTaskbar = true;
+            notifyIcon1.Visible = false;
+            this.WindowState = FormWindowState.Normal;
+            this.Visible = true;
+            this.Show();
+
         }
     }
 

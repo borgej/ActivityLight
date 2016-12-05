@@ -87,8 +87,12 @@ namespace ActivityLighter
                 AddUpdateAppSettings("epost", this.epost.Text);
 
                 // cipher password
-                var encryptedPass = StringCipher.Encrypt(this.password.Text);
-                AddUpdateAppSettings("password", encryptedPass);
+                if (!string.IsNullOrWhiteSpace(this.password.Text))
+                {
+                    var encryptedPass = StringCipher.Encrypt(this.password.Text);
+                    AddUpdateAppSettings("password", encryptedPass);
+                }
+                
 
                 AddUpdateAppSettings("exchangeHost", this.exchangeHost.Text);
 

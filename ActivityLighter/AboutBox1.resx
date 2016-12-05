@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="textBoxDescription.Text" xml:space="preserve">
-    <value>ActivityLight is a Luxafor status program that reads your availability from your Lync client or Exchange account and sets the color of the Luxafor light thereby. You can also choose your own availability and ActivityLighter will update your Lync status.</value>
+    <value>ActivityLight is a Luxafor status program that reads your availability from your Skype client or Exchange account and sets the color of the Luxafor light thereby. You can also choose your own availability and ActivityLighter will update your Skype status.</value>
   </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace ActivityLighter
 {
@@ -43,19 +44,22 @@ namespace ActivityLighter
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.aboutButton = new System.Windows.Forms.Button();
-            this.loginButton = new System.Windows.Forms.Button();
-            this.exitButton = new System.Windows.Forms.Button();
             this.button_green = new System.Windows.Forms.Button();
             this.button_yellow = new System.Windows.Forms.Button();
             this.button_red = new System.Windows.Forms.Button();
             this.button_automatic = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.loginButton = new System.Windows.Forms.Button();
+            this.exitButton = new System.Windows.Forms.Button();
+            this.aboutButton = new System.Windows.Forms.Button();
+            this.showAppMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.notifyIconMenu.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
+
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
             // 
             // statusBarText
             // 
@@ -74,11 +78,13 @@ namespace ActivityLighter
             // 
             this.notifyIcon1.ContextMenuStrip = this.notifyIconMenu;
             resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
+            this.notifyIcon1.Click += new System.EventHandler(this.notifyIcon1_Click);
             this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
             // 
             // notifyIconMenu
             // 
             this.notifyIconMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showAppMenuItem,
             this.availableToolStripMenuItem,
             this.awayToolStripMenuItem,
             this.buzyToolStripMenuItem,
@@ -131,44 +137,6 @@ namespace ActivityLighter
             this.flowLayoutPanel1.Controls.Add(this.button_automatic);
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            // 
-            // tableLayoutPanel1
-            // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.loginButton, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.exitButton, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.aboutButton, 0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // aboutButton
-            // 
-            this.aboutButton.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            resources.ApplyResources(this.aboutButton, "aboutButton");
-            this.aboutButton.BackgroundImage = global::ActivityLighter.Properties.Resources.about;
-            this.aboutButton.FlatAppearance.BorderSize = 0;
-            this.aboutButton.Name = "aboutButton";
-            this.aboutButton.UseVisualStyleBackColor = true;
-            this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
-            // 
-            // loginButton
-            // 
-            this.loginButton.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            resources.ApplyResources(this.loginButton, "loginButton");
-            this.loginButton.BackgroundImage = global::ActivityLighter.Properties.Resources.gear;
-            this.loginButton.FlatAppearance.BorderSize = 0;
-            this.loginButton.Name = "loginButton";
-            this.loginButton.UseVisualStyleBackColor = true;
-            this.loginButton.Click += new System.EventHandler(this.settingsButton_Click);
-            // 
-            // exitButton
-            // 
-            this.exitButton.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            resources.ApplyResources(this.exitButton, "exitButton");
-            this.exitButton.BackgroundImage = global::ActivityLighter.Properties.Resources.exit;
-            this.exitButton.FlatAppearance.BorderSize = 0;
-            this.exitButton.Name = "exitButton";
-            this.exitButton.UseVisualStyleBackColor = true;
-            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // button_green
             // 
@@ -226,6 +194,50 @@ namespace ActivityLighter
             this.button_automatic.UseVisualStyleBackColor = false;
             this.button_automatic.Click += new System.EventHandler(this.button_automatic_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.loginButton, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.exitButton, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.aboutButton, 0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // loginButton
+            // 
+            this.loginButton.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            resources.ApplyResources(this.loginButton, "loginButton");
+            this.loginButton.BackgroundImage = global::ActivityLighter.Properties.Resources.gear;
+            this.loginButton.FlatAppearance.BorderSize = 0;
+            this.loginButton.Name = "loginButton";
+            this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.Click += new System.EventHandler(this.settingsButton_Click);
+            // 
+            // exitButton
+            // 
+            this.exitButton.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            resources.ApplyResources(this.exitButton, "exitButton");
+            this.exitButton.BackgroundImage = global::ActivityLighter.Properties.Resources.exit;
+            this.exitButton.FlatAppearance.BorderSize = 0;
+            this.exitButton.Name = "exitButton";
+            this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
+            // aboutButton
+            // 
+            this.aboutButton.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            resources.ApplyResources(this.aboutButton, "aboutButton");
+            this.aboutButton.BackgroundImage = global::ActivityLighter.Properties.Resources.about;
+            this.aboutButton.FlatAppearance.BorderSize = 0;
+            this.aboutButton.Name = "aboutButton";
+            this.aboutButton.UseVisualStyleBackColor = true;
+            this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
+            // 
+            // showAppMenuItem
+            // 
+            this.showAppMenuItem.Name = "showAppMenuItem";
+            resources.ApplyResources(this.showAppMenuItem, "showAppMenuItem");
+            this.showAppMenuItem.Click += new System.EventHandler(this.showAppMenuItem_Click);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -271,6 +283,7 @@ namespace ActivityLighter
         private System.Windows.Forms.Button aboutButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.ToolStripMenuItem showAppMenuItem;
     }
 }
 

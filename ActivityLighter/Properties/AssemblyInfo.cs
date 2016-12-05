@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ActivityLighter")]
-[assembly: AssemblyDescription("ActivityLight is a Luxafor status program that reads your availability from your Lync client or Exchange account and sets the color of the Luxafor light thereby. You can also choose your own availability and ActivityLighter will update your Lync status.")]
+[assembly: AssemblyDescription("ActivityLight is a Luxafor status program that reads your availability from your Skype client or Exchange account and sets the color of the Luxafor light thereby. You can also choose your own availability and ActivityLighter will update your Skype status.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("BJSolutions")]
 [assembly: AssemblyProduct("ActivityLighter")]

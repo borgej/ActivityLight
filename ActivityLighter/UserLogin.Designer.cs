@@ -48,6 +48,7 @@
             // 
             this.username.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
             this.username.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.username.Enabled = false;
             this.username.Location = new System.Drawing.Point(3, 16);
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(159, 20);
@@ -61,9 +62,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(104, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Username";
+            this.label1.Text = "Exchange username";
             // 
             // lagreBtn
             // 
@@ -88,6 +89,7 @@
             this.verifiserBtn.TabIndex = 5;
             this.verifiserBtn.Text = "Verify";
             this.verifiserBtn.UseVisualStyleBackColor = false;
+            this.verifiserBtn.Visible = false;
             // 
             // label3
             // 
@@ -114,6 +116,7 @@
             // password
             // 
             this.password.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.password.Enabled = false;
             this.password.Location = new System.Drawing.Point(3, 94);
             this.password.Name = "password";
             this.password.PasswordChar = '*';
@@ -126,6 +129,7 @@
             // 
             this.epost.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
             this.epost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.epost.Enabled = false;
             this.epost.Location = new System.Drawing.Point(3, 55);
             this.epost.Name = "epost";
             this.epost.Size = new System.Drawing.Size(159, 20);
@@ -162,6 +166,7 @@
             // exchangeHost
             // 
             this.exchangeHost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.exchangeHost.Enabled = false;
             this.exchangeHost.Location = new System.Drawing.Point(3, 133);
             this.exchangeHost.Name = "exchangeHost";
             this.exchangeHost.Size = new System.Drawing.Size(159, 20);
@@ -173,9 +178,9 @@
             this.mirrorToLync.AutoSize = true;
             this.mirrorToLync.Location = new System.Drawing.Point(3, 159);
             this.mirrorToLync.Name = "mirrorToLync";
-            this.mirrorToLync.Size = new System.Drawing.Size(127, 17);
+            this.mirrorToLync.Size = new System.Drawing.Size(134, 17);
             this.mirrorToLync.TabIndex = 4;
-            this.mirrorToLync.Text = "Mirror status to Lync?";
+            this.mirrorToLync.Text = "Mirror status to Skype?";
             this.mirrorToLync.UseVisualStyleBackColor = true;
             // 
             // UserLogin
